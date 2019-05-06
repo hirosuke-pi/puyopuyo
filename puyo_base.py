@@ -16,6 +16,8 @@ class PuyoPuyoPlay:
 
     def play(self, puyo_color_val=4):    
         # I/O  
+        clear()
+        hide_cursor()
         self.__gboard.set_next_puyo(puyo_color_val)
         ioth = threading.Thread(target=self.__move_puyo_aync)
         ioth.daemon = True
@@ -44,6 +46,7 @@ class PuyoPuyoPlay:
             if char == 13 or self.__gboard.check_gameover():
                 break
 
+        show_cursor()
         self.__exit_flag = False
         ioth.join()
 
@@ -80,7 +83,6 @@ class PuyoPuyoPlay:
             self.__gboard.draw_ex()
             self.__puyo_active = True
             self.__gboard.moving_flag = True
-            time.sleep(0.08)
             # Fall puyo
             while self.__exit_flag and self.__puyo_active:
                     self.__gboard.move_puyo(0, 1)
@@ -89,10 +91,10 @@ class PuyoPuyoPlay:
                     # Put puyo
                     if not(self.__gboard.moving_flag):
                         while self.__exit_flag and self.__puyo_active:
-                            time.sleep(0.05)
                             self.__gboard.move_puyo(0, 1)
                             self.__gboard.draw_ex()
                             self.__puyo_active = self.__gboard.check_puyo_active(self.__gboard.puyo)
+                            time.sleep(0.05)
                     if not(self.__puyo_active):
                         break
             if self.__gboard.check_gameover():
@@ -108,7 +110,7 @@ def main():
         os.system("title CUI Graphic PuyoPuyo!")
 
     puyo = PuyoPuyoPlay()
-    puyo.play(5)
+    puyo.play(4)
 
     print("\r\n    [!] GameOver. Press Enter to exit...")
     input()

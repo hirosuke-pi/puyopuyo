@@ -1,7 +1,7 @@
 import os, sys
 import time
 
-#datalist : [ y1:[x1:[str, forecol, backcol], x2:.. ], y2:[].. ]
+
 def clear():
     if os.name == "nt":
         os.system("cls")
@@ -15,6 +15,71 @@ def reset_color():
         sys.stdout.write("\033[0m")
 
 
+if os.name == 'nt':
+    import ctypes
+
+    class _CursorInfo(ctypes.Structure):
+        _fields_ = [("size", ctypes.c_int),
+                    ("visible", ctypes.c_byte)]
+
+
+def hide_cursor_win32():
+    import ctypes
+    ci = _CursorInfo()
+    handle = ctypes.windll.kernel32.GetStdHandle(-11)
+    ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+    ci.visible = False
+    ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+
+
+
+def show_cursor_win32():
+    ci = _CursorInfo()
+    handle = ctypes.windll.kernel32.GetStdHandle(-11)
+    ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+    ci.visible = True
+    ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+
+
+def hide_cursor():
+    if os.name == "nt":
+        hide_cursor_win32()
+    else:
+        sys.stdout.write("\033[?25l")
+        sys.stdout.flush()        
+
+
+def show_cursor():
+    if os.name == "nt":
+        show_cursor_win32()
+    else:
+        sys.stdout.write("\033[?25h")
+        sys.stdout.flush()           
+
+
+def reset_cursor_pos():
+    if os.name == "nt":
+        reset_cursor_pos_win32()
+    else:
+        sys.stdout.write("\033[;H")
+        sys.stdout.flush()
+
+
+def reset_cursor_pos_win32():
+    import ctypes
+    class COORD(ctypes.Structure):
+        """struct in wincon.h."""
+        _fields_ = [
+            ("X", ctypes.c_short),
+            ("Y", ctypes.c_short)]
+    
+    coord = COORD()
+    stdout_handle = ctypes.windll.kernel32.GetStdHandle(-11)
+
+    ctypes.windll.kernel32.SetConsoleCursorPosition(stdout_handle, coord)
+
+
+#datalist : [ y1:[x1:[str, forecol, backcol], x2:.. ], y2:[].. ]
 def cprint(data_list):
     if os.name == "nt":
         for data_line in data_list:

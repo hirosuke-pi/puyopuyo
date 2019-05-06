@@ -22,6 +22,8 @@ class GraphicBoard:
         self.score = 0
         self.board_x = len(self.__board[0])
         self.board_y = len(self.__board)
+        self.__range_board_x = tuple(range(self.board_x))
+        self.__range_board_y = tuple(range(self.board_y))
         self.puyo = [[0, 0, 0], [0, 0, 0]]
         self.puyo1 = [[0, 0, 0], [0, 0, 0]]
         self.puyo2 = [[0, 0, 0], [0, 0, 0]]
@@ -110,8 +112,8 @@ class GraphicBoard:
 
 
     def check_all_clear(self):
-        for y in range(self.board_y):
-            for x in range(self.board_x):
+        for y in self.__range_board_y:
+            for x in self.__range_board_x:
                 color = self.__board[y][x]
                 if color != 0:
                     if color != -8:
@@ -123,8 +125,8 @@ class GraphicBoard:
 
     def check_puyo_chain(self):
         puyo_list = []
-        for y in range(self.board_y):
-            for x in range(self.board_x):
+        for y in self.__range_board_y:
+            for x in self.__range_board_x:
                 color = self.__board[y][x]
                 if color > 1 and not(self.__contain_puyo_list([color, x, y], puyo_list)):
                     self.removing_puyo_list = []
@@ -137,14 +139,14 @@ class GraphicBoard:
 
 
     def refresh_board(self):
-        for x in range(self.board_x):
+        for x in self.__range_board_x:
             line_puyo = ""
-            for y in reversed(range(self.board_y)):
+            for y in reversed(self.__range_board_y):
                 line_puyo += str(self.__board[y][x])
                 self.remove_puyo([[self.__board[y][x], x, y]])
             line_puyo_list = line_puyo.replace("0", "").ljust(self.board_y, "0")
             y3 = 0
-            for y2 in reversed(range(self.board_y)):
+            for y2 in reversed(self.__range_board_y):
                 self.add_puyo([[int(line_puyo_list[y3]), x, y2]])
                 y3 += 1
 
@@ -155,45 +157,44 @@ class GraphicBoard:
         self.__drawing = True
 
         space = "    "
-        raw_data = [[["", "n", "n"]],[["", "n", "n"]], [[space, "n", "n"], ["+                        +", "n", "n"]]]
-        for y in range(self.board_y):
-            line_data = [[space, "n", "n"], ["|", "n", "w"]]
-            for x in range(self.board_x):
+        raw_data = [[("", "n", "n")],[("", "n", "n")], [(space, "n", "n"), ("+                        +", "n", "n")]]
+        for y in self.__range_board_y:
+            line_data = [(space, "n", "n"), ("|", "n", "w")]
+            for x in self.__range_board_x:
                 puyo = self.get_num2puyo(self.__board[y][x])
-                if self.__board[y][x] > -8:
-                    line_data.append([puyo[0:4], puyo[4], "n"])
-                else:
-                    line_data.append([puyo[0:4], puyo[4], "n"])
-            line_data.append(["|", "n", "w"])
+                line_data.append((puyo[0:4], puyo[4], "n"))
+            line_data.append(("|", "n", "w"))
             raw_data.extend([line_data])
-        raw_data.append([[space, "n", "n"], ["+------------------------+", "n", "w"]])
+        raw_data.append(((space, "n", "n"), ("+------------------------+", "n", "w")))
         
         puyo1_c1 = self.get_num2puyo(self.puyo1[0][0])
         puyo1_c2 = self.get_num2puyo(self.puyo1[1][0])
         puyo2_c1 = self.get_num2puyo(self.puyo2[0][0])
         puyo2_c2 = self.get_num2puyo(self.puyo2[1][0])
 
-        raw_data[2].append(["   [1]", "n", "n"])
-        raw_data[3].append(["   +----+", "n", "n"])
-        raw_data[4].extend([["   |", "n", "n"], [puyo1_c2[0:4], "k", puyo1_c2[4]], ["|", "n", "n"]])
-        raw_data[5].extend([["   |", "n", "n"], [puyo1_c1[0:4], "k", puyo1_c1[4]], ["|", "n", "n"]])
-        raw_data[6].append(["   +----+", "n", "n"])
-        raw_data[8].append(["   [2]", "n", "n"])
-        raw_data[9].append(["   +----+", "n", "n"])
-        raw_data[10].extend([["   |", "n", "n"], [puyo2_c2[0:4], "k", puyo2_c2[4]], ["|", "n", "n"]])
-        raw_data[11].extend([["   |", "n", "n"], [puyo2_c1[0:4], "k", puyo2_c1[4]], ["|", "n", "n"]])
-        raw_data[12].append(["   +----+", "n", "n"])  
-        raw_data[14].append(["   "+ str(self.chain_val) + " Chain", "W", "n"]) 
-        raw_data[16].append(["   [MAX: "+ str(self.max_chain_val) + " Chain]", "G", "n"]) 
-        raw_data.append([["    ", "n", "n"], [" SCORE: "+ str(self.score) +" ", "k", "w"], ["", "", ""]])
+        raw_data[2].append(("   [1]", "n", "n"))
+        raw_data[3].append(("   +----+", "n", "n"))
+        raw_data[4].extend((("   |", "n", "n"), (puyo1_c2[0:4], "k", puyo1_c2[4]), ("|", "n", "n")))
+        raw_data[5].extend((("   |", "n", "n"), (puyo1_c1[0:4], "k", puyo1_c1[4]), ("|", "n", "n")))
+        raw_data[6].append(("   +----+", "n", "n"))
+        raw_data[8].append(("   [2]", "n", "n"))
+        raw_data[9].append(("   +----+", "n", "n"))
+        raw_data[10].extend((("   |", "n", "n"), (puyo2_c2[0:4], "k", puyo2_c2[4]), ("|", "n", "n")))
+        raw_data[11].extend((("   |", "n", "n"), (puyo2_c1[0:4], "k", puyo2_c1[4]), ("|", "n", "n")))
+        raw_data[12].append(("   +----+", "n", "n"))  
+        raw_data[14].append(("   "+ str(self.chain_val) + " Chain", "W", "n")) 
+        raw_data[16].append(("   [MAX: "+ str(self.max_chain_val) + " Chain]", "G", "n")) 
+        raw_data.append([("    ", "n", "n"), (" SCORE: "+ str(self.score) +" ", "k", "w"), ("", "", "")])
 
         if self.all_clear:
             raw_data[18].extend([["   [ALL CLEAR!!]", "Y", "n"], ["", "", ""]])
 
-        clear()
-
+        data = tuple(raw_data)
+        #print(tp)
+        #clear()
+        reset_cursor_pos()
         #print(raw_data)
-        cprint(raw_data)
+        cprint(data)
         self.__drawing = False
 
 
