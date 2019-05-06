@@ -162,7 +162,10 @@ class GraphicBoard:
             line_data = [(space, "n", "n"), ("|", "n", "w")]
             for x in self.__range_board_x:
                 puyo = self.get_num2puyo(self.__board[y][x])
-                line_data.append((puyo[0:4], puyo[4], "n"))
+                if self.__board[y][x] == -8:
+                    line_data.append((puyo[0:4], puyo[4], "n"))
+                else:
+                    line_data.append((puyo[0:4], "k", puyo[4]))
             line_data.append(("|", "n", "w"))
             raw_data.extend([line_data])
         raw_data.append(((space, "n", "n"), ("+------------------------+", "n", "w")))
