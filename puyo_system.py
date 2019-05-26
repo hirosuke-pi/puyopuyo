@@ -10,7 +10,7 @@ class GraphicBoard:
     def __init__(self):
         self.moving_flag = True
         self.removing_puyo_list = []
-        self.__board = [[0, 0, 0, 0, 0, 0] for i in range(14)]
+        self.__board = [[0, 0, 0, 0, 0, 0] for i in range(16)]
         self.__check_list = ((0, -1), (-1, 0), (0, 1), (1, 0))
         self.__check_dic = {self.__check_list[0] : 0, self.__check_list[1] : 1,
         self.__check_list[2] : 2, self.__check_list[3] : 3}
@@ -32,9 +32,6 @@ class GraphicBoard:
         self.link_bonus_dict = { 4:0, 5:2, 6:3, 7:4, 8:5, 9:6, 10:7, 11:10 }
         self.color_bonus_dict = { 1:0, 2:3, 3:6, 4:12, 5:24 }
         self.set_next_puyo()
-
-    def __reload_gmaover_line(self):
-        self.__board[0][2] = -8
         
 
     def __get_filled_puyo_x(self, puyo, x, count, now_line, max_line):
@@ -105,7 +102,7 @@ class GraphicBoard:
 
     
     def check_gameover(self):
-        if self.__board[0][2] > 0:
+        if self.__board[2][2] > 0:
             return True
         else:
             return False
@@ -296,13 +293,15 @@ class GraphicBoard:
 
 
     def add_puyo(self, puyo_list):
-        self.__reload_gmaover_line()
+        if self.__board[2][2] == 0:
+            self.__board[2][2] = -8
         for puyo in puyo_list:
             self.__board[puyo[2]][puyo[1]] = puyo[0]
 
 
     def remove_puyo(self, puyo_list, effect=False):
-        self.__board[0][2] = 0
+        if self.__board[2][2] == -8:
+            self.__board[2][2] = 0 
         if effect:
             for puyo in puyo_list:
                 self.__board[puyo[2]][puyo[1]] = 7
@@ -319,6 +318,8 @@ class GraphicBoard:
 
     
     def move_puyo(self, x, y):  
+        if self.__board[2][2] == -8:
+            self.__board[2][2] = 0        
         tmp_puyo_list = copy.deepcopy(self.puyo)
         for i in range(len(self.puyo)):
             moving_x = 0

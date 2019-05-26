@@ -41,6 +41,9 @@ class PuyoPuyoPlay:
                 elif char == 109: # M
                     self.__gboard.replace_puyo(False)
                     self.__gboard.draw_ex()
+                elif char == 32:
+                    clear()
+                    hide_cursor()
             
             # Enter
             if char == 13 or self.__gboard.check_gameover():
@@ -74,6 +77,10 @@ class PuyoPuyoPlay:
                     self.__gboard.draw_ex()
                     time.sleep(0.5)
 
+            if self.__gboard.check_gameover():
+                self.__gameover = True
+                break
+
             # Initalize next puyo
             self.__gboard.puyo = copy.deepcopy(self.__gboard.puyo1)
             self.__gboard.puyo1 = copy.deepcopy(self.__gboard.puyo2)
@@ -97,9 +104,6 @@ class PuyoPuyoPlay:
                             time.sleep(0.05)
                     if not(self.__puyo_active):
                         break
-            if self.__gboard.check_gameover():
-                self.__gameover = True
-                break
     
     def stop(self):
         self.__exit_flag = True
