@@ -1,11 +1,15 @@
 import os
 
+
 class _GetchUnix:
     def __init__(self):
-        import tty, sys
+        pass
 
     def __call__(self):
-        import sys, tty, termios
+        import sys
+        import termios
+        import tty
+
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
         try:
@@ -18,12 +22,12 @@ class _GetchUnix:
 
 class _GetchWindows:
     def __init__(self):
-        import msvcrt
+        pass
 
     def __call__(self):
         import msvcrt
-        return msvcrt.getch()
 
+        return msvcrt.getch()
 
 
 def getchar():
@@ -33,4 +37,3 @@ def getchar():
         impl = _GetchUnix()
 
     return ord(impl())
-

@@ -1,4 +1,4 @@
-import os, sys
+import os
 import random
 
 from .getch_io import *
@@ -20,20 +20,76 @@ def main():
         str_color4 = random.choice(color_party)
 
         game_display = [
-            [[space, "n", "n"], ["    pppppppp                                 ", str_color1, ""], ["                      ", str_color4, ""]],
-            [[space, "n", "n"], ["     pp    pp             yy      yy         ", str_color1, ""], ["       OOOOOOOOOO       ", str_color4, ""]],
-            [[space, "n", "n"], ["    pp   pp             yy yy   yyy     oooo ", str_color1, ""], ["     OO          OO   ", str_color4, ""]],
-            [[space, "n", "n"], ["   pppppp    uu   uu      yy   yyy    oo   oo", str_color1, ""], ["    OO   |    |   OO", str_color4, ""]],
-            [[space, "n", "n"], ["  pp        uu   uu         yyy yy   oo   oo ", str_color1, ""], ["    OO            OO   ", str_color4, ""]],
-            [[space, "n", "n"], [" pp          uuuuu uu   yy     yy     oooo   ", str_color1, ""], ["      OOOOOOOOOOOO", str_color4, ""]],
-            [[space, "n", "n"], ["                          yyyyyy             ", str_color1, ""], ["     ", str_color4, ""]],
-            [[space * 3, "n", "n"], ["    pppppppp                                      ", str_color2, ""], ["", str_color3, ""]],
-            [[space * 3, "n", "n"], ["     pp    pp             yy      yy              ", str_color2, ""], ["!!!", str_color3, ""]],
-            [[space * 3, "n", "n"], ["    pp   pp             yy yy   yyy     oooo     ", str_color2, ""], ["!!!", str_color3, ""]],
-            [[space * 3, "n", "n"], ["   pppppp    uu   uu      yy   yyy    oo   oo   ", str_color2, ""], ["!!!", str_color3, ""]],
-            [[space * 3, "n", "n"], ["  pp        uu   uu         yyy yy   oo   oo   ", str_color2, ""], ["!!", str_color3, ""]],
-            [[space * 3, "n", "n"], [" pp          uuuuu uu   yy     yy     oooo   ", str_color2, ""], ["", str_color3, ""]],
-            [[space * 3, "n", "n"], ["                          yyyyyy             ", str_color2, ""], ["!!", str_color3, ""]],
+            [
+                [space, "n", "n"],
+                ["    pppppppp                                 ", str_color1, ""],
+                ["                      ", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                ["     pp    pp             yy      yy         ", str_color1, ""],
+                ["       OOOOOOOOOO       ", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                ["    pp   pp             yy yy   yyy     oooo ", str_color1, ""],
+                ["     OO          OO   ", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                ["   pppppp    uu   uu      yy   yyy    oo   oo", str_color1, ""],
+                ["    OO   |    |   OO", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                ["  pp        uu   uu         yyy yy   oo   oo ", str_color1, ""],
+                ["    OO            OO   ", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                [" pp          uuuuu uu   yy     yy     oooo   ", str_color1, ""],
+                ["      OOOOOOOOOOOO", str_color4, ""],
+            ],
+            [
+                [space, "n", "n"],
+                ["                          yyyyyy             ", str_color1, ""],
+                ["     ", str_color4, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["    pppppppp                                      ", str_color2, ""],
+                ["", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["     pp    pp             yy      yy              ", str_color2, ""],
+                ["!!!", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["    pp   pp             yy yy   yyy     oooo     ", str_color2, ""],
+                ["!!!", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["   pppppp    uu   uu      yy   yyy    oo   oo   ", str_color2, ""],
+                ["!!!", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["  pp        uu   uu         yyy yy   oo   oo   ", str_color2, ""],
+                ["!!", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                [" pp          uuuuu uu   yy     yy     oooo   ", str_color2, ""],
+                ["", str_color3, ""],
+            ],
+            [
+                [space * 3, "n", "n"],
+                ["                          yyyyyy             ", str_color2, ""],
+                ["!!", str_color3, ""],
+            ],
         ]
 
         clear()
@@ -52,11 +108,11 @@ def main():
             if color_val == 0:
                 print()
                 break
-            elif color_val < 2 or color_val > 5:
+            if color_val < 2 or color_val > 5:
                 continue
         else:
             continue
-        
+
         print("\r\n     [+] Press Enter to start!")
         input()
 
@@ -65,7 +121,7 @@ def main():
             puyo_game.play(color_val)
 
             print("\r\n    [!] GameOver!")
-            y_n = input("    [?] Do you want to play one more time? (y/n): ")  
+            y_n = input("    [?] Do you want to play one more time? (y/n): ")
             if y_n.lower() != "y":
                 break
 
