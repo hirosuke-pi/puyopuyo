@@ -19,78 +19,24 @@ def main():
         str_color3 = random.choice(color_party)
         str_color4 = random.choice(color_party)
 
+        # fmt: off
         game_display = [
-            [
-                [space, "n", "n"],
-                ["    pppppppp                                 ", str_color1, ""],
-                ["                      ", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                ["     pp    pp             yy      yy         ", str_color1, ""],
-                ["       OOOOOOOOOO       ", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                ["    pp   pp             yy yy   yyy     oooo ", str_color1, ""],
-                ["     OO          OO   ", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                ["   pppppp    uu   uu      yy   yyy    oo   oo", str_color1, ""],
-                ["    OO   |    |   OO", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                ["  pp        uu   uu         yyy yy   oo   oo ", str_color1, ""],
-                ["    OO            OO   ", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                [" pp          uuuuu uu   yy     yy     oooo   ", str_color1, ""],
-                ["      OOOOOOOOOOOO", str_color4, ""],
-            ],
-            [
-                [space, "n", "n"],
-                ["                          yyyyyy             ", str_color1, ""],
-                ["     ", str_color4, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["    pppppppp                                      ", str_color2, ""],
-                ["", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["     pp    pp             yy      yy              ", str_color2, ""],
-                ["!!!", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["    pp   pp             yy yy   yyy     oooo     ", str_color2, ""],
-                ["!!!", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["   pppppp    uu   uu      yy   yyy    oo   oo   ", str_color2, ""],
-                ["!!!", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["  pp        uu   uu         yyy yy   oo   oo   ", str_color2, ""],
-                ["!!", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                [" pp          uuuuu uu   yy     yy     oooo   ", str_color2, ""],
-                ["", str_color3, ""],
-            ],
-            [
-                [space * 3, "n", "n"],
-                ["                          yyyyyy             ", str_color2, ""],
-                ["!!", str_color3, ""],
-            ],
+            [[space, "n", "n"], ["    pppppppp                                 ", str_color1, ""], ["                      ", str_color4, ""]],   # noqa: E501
+            [[space, "n", "n"], ["     pp    pp             yy      yy         ", str_color1, ""], ["       OOOOOOOOOO       ", str_color4, ""]], # noqa: E501
+            [[space, "n", "n"], ["    pp   pp             yy yy   yyy     oooo ", str_color1, ""], ["     OO          OO   ", str_color4, ""]],   # noqa: E501
+            [[space, "n", "n"], ["   pppppp    uu   uu      yy   yyy    oo   oo", str_color1, ""], ["    OO   |    |   OO", str_color4, ""]],     # noqa: E501
+            [[space, "n", "n"], ["  pp        uu   uu         yyy yy   oo   oo ", str_color1, ""], ["    OO            OO   ", str_color4, ""]],  # noqa: E501
+            [[space, "n", "n"], [" pp          uuuuu uu   yy     yy     oooo   ", str_color1, ""], ["      OOOOOOOOOOOO", str_color4, ""]],       # noqa: E501
+            [[space, "n", "n"], ["                          yyyyyy             ", str_color1, ""], ["     ", str_color4, ""]],                    # noqa: E501
+            [[space * 3, "n", "n"], ["    pppppppp                                      ", str_color2, ""], ["", str_color3, ""]],                # noqa: E501
+            [[space * 3, "n", "n"], ["     pp    pp             yy      yy              ", str_color2, ""], ["!!!", str_color3, ""]],             # noqa: E501
+            [[space * 3, "n", "n"], ["    pp   pp             yy yy   yyy     oooo     ", str_color2, ""], ["!!!", str_color3, ""]],              # noqa: E501
+            [[space * 3, "n", "n"], ["   pppppp    uu   uu      yy   yyy    oo   oo   ", str_color2, ""], ["!!!", str_color3, ""]],               # noqa: E501
+            [[space * 3, "n", "n"], ["  pp        uu   uu         yyy yy   oo   oo   ", str_color2, ""], ["!!", str_color3, ""]],                 # noqa: E501
+            [[space * 3, "n", "n"], [" pp          uuuuu uu   yy     yy     oooo   ", str_color2, ""], ["", str_color3, ""]],                     # noqa: E501
+            [[space * 3, "n", "n"], ["                          yyyyyy             ", str_color2, ""], ["!!", str_color3, ""]],                   # noqa: E501
         ]
+        # fmt: on
 
         clear()
         print("\r\n")
