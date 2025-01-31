@@ -1,9 +1,9 @@
 import os, sys
 import random
 
-from puyo_base import *
-from getch_io import *
-from graphics import *
+from .getch_io import *
+from .graphics import *
+from .puyo_base import *
 
 
 def main():
